@@ -1,6 +1,7 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { AreaChart, Area, BarChart, Bar, ResponsiveContainer, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChartContainer } from "@/components/ui/chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Inbox, Clock, BookmarkPlus, ArrowRight, TrendingUp, Filter, Calendar } from "lucide-react";
-import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Bar } from "recharts";
-import { ResponsiveContainer } from "recharts";
+import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer, AreaChart, Area } from "recharts";
 
 const InvestorDashboard = () => {
   // Mock data for charts and stats
@@ -74,7 +72,6 @@ const InvestorDashboard = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Stats cards */}
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -137,7 +134,6 @@ const InvestorDashboard = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-          {/* Dealflow Pipeline */}
           <div className="lg:col-span-2 space-y-6">
             <Card>
               <CardHeader>
@@ -234,30 +230,26 @@ const InvestorDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-72">
-                  <ChartContainer
-                    className="h-64"
-                    config={{
-                      count: { color: "hsl(215 100% 50%)" }
-                    }}
-                  >
-                    {(props) => (
-                      <ResponsiveContainer>
-                        <AreaChart data={dealflowData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="name" />
-                          <YAxis />
-                          <Tooltip />
-                          <Area dataKey="count" fill="var(--color-count)" />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    )}
-                  </ChartContainer>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <AreaChart data={dealflowData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                      <defs>
+                        <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(215 100% 50%)" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="hsl(215 100% 50%)" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="count" stroke="hsl(215 100% 50%)" fillOpacity={1} fill="url(#colorCount)" />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
           </div>
           
-          {/* Sidebar */}
           <div className="space-y-6">
             <Card>
               <CardHeader>
