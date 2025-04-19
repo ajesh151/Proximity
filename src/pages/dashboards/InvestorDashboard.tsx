@@ -1,12 +1,12 @@
-
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Chart } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Inbox, Clock, BookmarkPlus, ArrowRight, TrendingUp, Filter, Calendar } from "lucide-react";
+import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Bar } from "recharts";
 
 const InvestorDashboard = () => {
   // Mock data for charts and stats
@@ -232,16 +232,22 @@ const InvestorDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-72">
-                  <Chart
+                  <ChartContainer
                     className="h-64"
-                    type="bar"
-                    data={dealflowData}
-                    categories={["count"]}
-                    index="name"
-                    colors={["blue"]}
-                    valueFormatter={(value: number) => `${value} pitches`}
-                    showLegend={false}
-                  />
+                    config={{
+                      count: { color: "hsl(215 100% 50%)" }
+                    }}
+                  >
+                    {(props) => (
+                      <BarChart data={dealflowData}>
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <Tooltip />
+                        <Bar dataKey="count" fill="var(--color-count)" />
+                      </BarChart>
+                    )}
+                  </ChartContainer>
                 </div>
               </CardContent>
             </Card>

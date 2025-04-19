@@ -59,6 +59,14 @@ export interface PitchComment {
   isPrivate: boolean;
   createdAt: Date;
   parentId?: string;
+  user?: {
+    name: string;
+    avatar?: string;
+    organization?: {
+      name: string;
+      role: UserRole;
+    };
+  };
 }
 
 export interface PitchEvent {

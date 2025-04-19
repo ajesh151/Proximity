@@ -1,10 +1,9 @@
-
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Chart } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 import { 
   TrendingUp, 
   Users, 
@@ -16,6 +15,7 @@ import {
   PlusCircle,
   Eye
 } from "lucide-react";
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from "recharts";
 
 const StartupDashboard = () => {
   // Mock data for charts
@@ -134,16 +134,22 @@ const StartupDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="h-72">
-                  <Chart
+                  <ChartContainer
                     className="h-64"
-                    type="line"
-                    data={profileViewsData}
-                    categories={["views"]}
-                    index="name"
-                    colors={["blue"]}
-                    valueFormatter={(value: number) => `${value} views`}
-                    showLegend={false}
-                  />
+                    config={{
+                      views: { color: "hsl(215 100% 50%)" }
+                    }}
+                  >
+                    {(props) => (
+                      <LineChart data={profileViewsData}>
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="views" stroke="var(--color-views)" />
+                      </LineChart>
+                    )}
+                  </ChartContainer>
                 </div>
               </CardContent>
             </Card>
