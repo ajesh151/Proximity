@@ -40,7 +40,7 @@ const EnterpriseDashboard = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Industry Focus</label>
                 <select className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <option value="">All Industries</option>
+                  <option value="all">All Industries</option>
                   <option value="tech">Technology</option>
                   <option value="healthcare">Healthcare</option>
                   <option value="fintech">Fintech</option>
@@ -52,7 +52,7 @@ const EnterpriseDashboard = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Pitch Stage</label>
                 <select className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <option value="">All Stages</option>
+                  <option value="all">All Stages</option>
                   <option value="seed">Seed</option>
                   <option value="seriesA">Series A</option>
                   <option value="seriesB">Series B</option>
@@ -63,7 +63,7 @@ const EnterpriseDashboard = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Partnership Type</label>
                 <select className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <option value="">All Types</option>
+                  <option value="all">All Types</option>
                   <option value="investment">Investment</option>
                   <option value="strategic">Strategic Partnership</option>
                   <option value="client">Client/Vendor</option>

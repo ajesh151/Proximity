@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -241,13 +242,13 @@ const InvestorDashboard = () => {
                   >
                     {(props) => (
                       <ResponsiveContainer>
-                        <BarChart data={dealflowData}>
+                        <AreaChart data={dealflowData}>
                           <CartesianGrid strokeDasharray="3 3" />
                           <XAxis dataKey="name" />
                           <YAxis />
                           <Tooltip />
-                          <Bar dataKey="count" fill="var(--color-count)" />
-                        </BarChart>
+                          <Area dataKey="count" fill="var(--color-count)" />
+                        </AreaChart>
                       </ResponsiveContainer>
                     )}
                   </ChartContainer>

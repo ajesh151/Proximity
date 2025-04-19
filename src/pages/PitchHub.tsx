@@ -146,12 +146,12 @@ const PitchHub = () => {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Industry</label>
-                  <Select onValueChange={setIndustry}>
+                  <Select onValueChange={setIndustry} value={industry}>
                     <SelectTrigger>
                       <SelectValue placeholder="All Industries" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Industries</SelectItem>
+                      <SelectItem value="all_industries">All Industries</SelectItem>
                       <SelectItem value="SaaS">SaaS</SelectItem>
                       <SelectItem value="Healthcare">Healthcare</SelectItem>
                       <SelectItem value="Fintech">Fintech</SelectItem>
@@ -165,12 +165,12 @@ const PitchHub = () => {
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Funding Stage</label>
-                  <Select onValueChange={setStage}>
+                  <Select onValueChange={setStage} value={stage}>
                     <SelectTrigger>
                       <SelectValue placeholder="All Stages" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Stages</SelectItem>
+                      <SelectItem value="all_stages">All Stages</SelectItem>
                       <SelectItem value="seed">Seed</SelectItem>
                       <SelectItem value="seriesA">Series A</SelectItem>
                       <SelectItem value="seriesB">Series B</SelectItem>
@@ -183,12 +183,12 @@ const PitchHub = () => {
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Region</label>
-                  <Select onValueChange={setRegion}>
+                  <Select onValueChange={setRegion} value={region}>
                     <SelectTrigger>
                       <SelectValue placeholder="All Regions" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Regions</SelectItem>
+                      <SelectItem value="all_regions">All Regions</SelectItem>
                       <SelectItem value="North America">North America</SelectItem>
                       <SelectItem value="Europe">Europe</SelectItem>
                       <SelectItem value="Asia">Asia</SelectItem>
@@ -206,7 +206,7 @@ const PitchHub = () => {
                       <SelectValue placeholder="Any Amount" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Any Amount</SelectItem>
+                      <SelectItem value="any_amount">Any Amount</SelectItem>
                       <SelectItem value="under500k">Under $500K</SelectItem>
                       <SelectItem value="500kTo1m">$500K - $1M</SelectItem>
                       <SelectItem value="1mTo5m">$1M - $5M</SelectItem>
