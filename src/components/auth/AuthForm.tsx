@@ -4,7 +4,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { Briefcase, Building2, User } from "lucide-react";
+import { UserRole } from "@/types/user";
 
 export const AuthForm = () => {
   const [searchParams] = useSearchParams();
@@ -12,6 +15,7 @@ export const AuthForm = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [businessDocUploaded, setBusinessDocUploaded] = useState(false);
+  const [userRole, setUserRole] = useState<UserRole | "">("");
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,10 +37,8 @@ export const AuthForm = () => {
           return;
         }
         
-        toast({
-          title: "Verification Submitted",
-          description: "Your business verification is pending review. We'll notify you once approved.",
-        });
+        // For sign up, we redirect to the verification process
+        navigate("/verification");
       } else {
         toast({
           title: "Welcome back",
@@ -65,6 +67,10 @@ export const AuthForm = () => {
     }
   };
 
+  const handleRoleSelect = (role: UserRole) => {
+    setUserRole(role);
+  };
+
   return (
     <div className="w-full max-w-md space-y-6 p-6 glass-card">
       <div className="space-y-2 text-center">
@@ -88,9 +94,37 @@ export const AuthForm = () => {
         {isSignUp && (
           <>
             <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name</Label>
+              <Label htmlFor="companyName">Organization Name</Label>
               <Input id="companyName" placeholder="Acme Corporation" required />
             </div>
+            
+            <div className="space-y-2">
+              <Label>Select Your Role</Label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                <div 
+                  className={`flex flex-col items-center p-3 border rounded-lg cursor-pointer hover:border-primary transition-colors ${userRole === 'startup' ? 'border-primary bg-primary/5' : ''}`}
+                  onClick={() => handleRoleSelect('startup')}
+                >
+                  <Building2 className="h-8 w-8 mb-2" />
+                  <span className="text-sm font-medium">Startup / Small Business</span>
+                </div>
+                <div 
+                  className={`flex flex-col items-center p-3 border rounded-lg cursor-pointer hover:border-primary transition-colors ${userRole === 'enterprise' ? 'border-primary bg-primary/5' : ''}`}
+                  onClick={() => handleRoleSelect('enterprise')}
+                >
+                  <Briefcase className="h-8 w-8 mb-2" />
+                  <span className="text-sm font-medium">Enterprise / Large Org</span>
+                </div>
+                <div 
+                  className={`flex flex-col items-center p-3 border rounded-lg cursor-pointer hover:border-primary transition-colors ${userRole === 'investor' ? 'border-primary bg-primary/5' : ''}`}
+                  onClick={() => handleRoleSelect('investor')}
+                >
+                  <User className="h-8 w-8 mb-2" />
+                  <span className="text-sm font-medium">Investor / Mentor</span>
+                </div>
+              </div>
+            </div>
+            
             <div className="space-y-2">
               <Label htmlFor="businessDoc">Business Verification Document</Label>
               <p className="text-xs text-muted-foreground mb-2">
@@ -107,6 +141,23 @@ export const AuthForm = () => {
                 <p className="text-xs text-green-600 dark:text-green-400">Document uploaded successfully</p>
               )}
             </div>
+            
+            <div className="flex items-center space-x-2">
+              <Checkbox id="terms" required />
+              <label
+                htmlFor="terms"
+                className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                I agree to the{" "}
+                <a href="#" className="text-primary underline">
+                  terms and conditions
+                </a>{" "}
+                and{" "}
+                <a href="#" className="text-primary underline">
+                  privacy policy
+                </a>
+              </label>
+            </div>
           </>
         )}
 
@@ -118,7 +169,7 @@ export const AuthForm = () => {
           </div>
         )}
 
-        <Button type="submit" className="w-full" disabled={isLoading}>
+        <Button type="submit" className="w-full" disabled={isLoading || (isSignUp && (!userRole || !businessDocUploaded))}>
           {isLoading ? "Processing..." : isSignUp ? "Submit for Verification" : "Sign In"}
         </Button>
       </form>
