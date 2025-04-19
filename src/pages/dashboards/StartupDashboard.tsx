@@ -15,7 +15,7 @@ import {
   PlusCircle,
   Eye
 } from "lucide-react";
-import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const StartupDashboard = () => {
   // Mock data for charts
@@ -141,13 +141,15 @@ const StartupDashboard = () => {
                     }}
                   >
                     {(props) => (
-                      <LineChart data={profileViewsData}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="views" stroke="var(--color-views)" />
-                      </LineChart>
+                      <ResponsiveContainer>
+                        <LineChart data={profileViewsData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="name" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line type="monotone" dataKey="views" stroke="var(--color-views)" />
+                        </LineChart>
+                      </ResponsiveContainer>
                     )}
                   </ChartContainer>
                 </div>

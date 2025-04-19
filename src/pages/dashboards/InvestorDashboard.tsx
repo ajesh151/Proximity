@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Inbox, Clock, BookmarkPlus, ArrowRight, TrendingUp, Filter, Calendar } from "lucide-react";
 import { BarChart, XAxis, YAxis, CartesianGrid, Tooltip, Bar } from "recharts";
+import { ResponsiveContainer } from "recharts";
 
 const InvestorDashboard = () => {
   // Mock data for charts and stats
@@ -239,13 +240,15 @@ const InvestorDashboard = () => {
                     }}
                   >
                     {(props) => (
-                      <BarChart data={dealflowData}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Tooltip />
-                        <Bar dataKey="count" fill="var(--color-count)" />
-                      </BarChart>
+                      <ResponsiveContainer>
+                        <BarChart data={dealflowData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="name" />
+                          <YAxis />
+                          <Tooltip />
+                          <Bar dataKey="count" fill="var(--color-count)" />
+                        </BarChart>
+                      </ResponsiveContainer>
                     )}
                   </ChartContainer>
                 </div>
